@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>lab — intro</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #fff; touch-action: none; }
+      canvas { display: block; }
+      #hud {
+        position: fixed; left: 8px; top: 8px; color: #123; font: 12px monospace;
+        white-space: pre; pointer-events: none; text-shadow: 0 1px 0 #fff8;
+      }
+      #loading {
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        font: 14px monospace; color: #222; background: #fff; transition: opacity 0.4s;
+      }
+      .click { cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <div id="hud">booting…</div>
+    <div id="loading">loading the intro…</div>
+    <script type="module" src="./intro.js"></script>
+  </body>
+</html>

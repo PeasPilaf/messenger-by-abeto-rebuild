@@ -1,0 +1,23 @@
+{
+  "name": "messenger-rebuild",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A clean-room, readable single-player rebuild of Messenger by abeto (messenger.abeto.co), for learning.",
+  "scripts": {
+    "sync": "node tools/sync-assets.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "three": "0.180.0",
+    "three-mesh-bvh": "^0.9.1"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true
+  }
+}

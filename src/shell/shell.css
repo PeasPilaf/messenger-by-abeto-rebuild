@@ -1,0 +1,84 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+#canvas-host {
+  position: absolute;
+  inset: 0;
+}
+
+#canvas-host canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#loader {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  pointer-events: none;
+  background: #fff;
+  z-index: 10;
+  transition: opacity 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+#loader .spinner {
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+#loader.is-visible .spinner {
+  opacity: 1;
+}
+
+#loader.is-hiding {
+  opacity: 0;
+}
+
+#loader svg {
+  display: block;
+  position: relative;
+  width: 90px;
+  height: 90px;
+  will-change: transform, opacity;
+}
+
+#loader svg path {
+  fill: none;
+  stroke: #222;
+  stroke-width: 2px;
+}
+
+#loader svg g {
+  visibility: hidden;
+  animation: loader-frame 1s infinite;
+}
+
+#loader svg #frame0 { animation-delay: 0s; }
+#loader svg #frame1 { animation-delay: 0.125s; }
+#loader svg #frame2 { animation-delay: 0.25s; }
+#loader svg #frame3 { animation-delay: 0.375s; }
+#loader svg #frame4 { animation-delay: 0.5s; }
+#loader svg #frame5 { animation-delay: 0.625s; }
+#loader svg #frame6 { animation-delay: 0.75s; }
+#loader svg #frame7 { animation-delay: 0.875s; }
+
+@keyframes loader-frame {
+  0% { visibility: visible; }
+  12.5% { visibility: hidden; }
+  100% { visibility: hidden; }
+}

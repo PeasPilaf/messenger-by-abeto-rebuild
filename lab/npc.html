@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:," />
+    <title>lab — NPCs · dialogue · quests</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+      canvas { display: block; }
+      #hud {
+        position: fixed; left: 10px; top: 10px; color: #fff;
+        font: 11px/1.45 ui-monospace, Menlo, monospace; white-space: pre;
+        text-shadow: 0 1px 2px #000, 0 0 6px #000; pointer-events: none;
+        max-width: 96vw;
+      }
+      #help {
+        position: fixed; left: 10px; bottom: 10px; color: #fff; opacity: 0.75;
+        font: 11px/1.5 ui-monospace, Menlo, monospace; white-space: pre;
+        text-shadow: 0 1px 2px #000; pointer-events: none;
+      }
+
+      #dialog {
+        position: fixed; left: 50%; bottom: 46px; transform: translateX(-50%) translateY(20px);
+        width: min(760px, 82vw); min-height: 132px; padding: 46px 26px 22px;
+        background: #f8f8f8; color: #0f0f0f; border-radius: 6px;
+        border: 4px solid #66bde6; box-sizing: border-box;
+        font: 22px/1.25 ui-monospace, Menlo, monospace; letter-spacing: -0.01em;
+        opacity: 0; transition: opacity 0.16s ease, transform 0.16s ease;
+        pointer-events: none; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+      }
+      #dialog.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+      #dialog-name {
+        position: absolute; left: 16px; top: -20px; padding: 7px 16px;
+        background: #66bde6; color: #fff; border-radius: 4px;
+        font: 700 18px/1 ui-monospace, Menlo, monospace; letter-spacing: 0.02em;
+      }
+      #dialog-hint {
+        position: absolute; right: 16px; bottom: 8px; font-size: 11px;
+        color: #647a87; letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="hud">loading…</div>
+    <div id="dialog">
+      <div id="dialog-name">NPC</div>
+      <div id="dialog-text"></div>
+      <div id="dialog-hint">SPACE / E</div>
+    </div>
+    <div id="help">WASD move · drag orbit · wheel zoom · click a quest NPC to talk · SPACE/E advance · Esc close · T = office worker · [ ] cycle quest NPCs</div>
+    <script type="module" src="./npc.js"></script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Assets lab — decoded .drc / .ktx2 / .ogg</title>
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        padding: 28px 34px 60px;
+        background: #14161a;
+        color: #e8e6e1;
+        font: 13px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      }
+      h1 { font-size: 19px; font-weight: 600; margin: 0 0 2px; letter-spacing: 0.02em; }
+      .sub { color: #8b929c; margin-bottom: 22px; }
+      h2 { font-size: 14px; font-weight: 600; color: #d7c48a; margin: 26px 0 8px; }
+      code { color: #a9d4ff; }
+      .muted { color: #8b929c; }
+      .row { display: flex; gap: 10px; padding: 1px 0; }
+      .row .label { color: #9aa2ad; flex: 0 0 380px; }
+      .row .value { color: #d8dde4; word-break: break-all; }
+      .checks { margin-top: 18px; border-top: 1px solid #2a2e35; padding-top: 12px; }
+      .check.pass { color: #8fd694; }
+      .check.fail { color: #ff7d7d; font-weight: 700; }
+      .summary { font-size: 14px; margin: 14px 0; }
+      .summary.ok { color: #8fd694; }
+      .summary.bad { color: #ff7d7d; }
+      .canvases { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-start; margin: 10px 0 4px; }
+      figure { margin: 0; }
+      figcaption { color: #8b929c; font-size: 11px; margin-top: 5px; max-width: 300px; }
+      canvas { display: block; image-rendering: pixelated; background: #000; border: 1px solid #2a2e35; }
+      #gl canvas { width: 64px; height: 64px; }
+      .out { white-space: pre-wrap; color: #c9d1d9; }
+    </style>
+  </head>
+  <body>
+    <h1>assets lab</h1>
+    <div class="sub">
+      Decodes one terrain chunk, the grass point cloud, an NPC mesh + skeleton + idle clip,
+      atlas/noise/LUT textures and one audio file through <code>src/assets/*</code>.
+      Results are asserted below; the screenshot is taken by <code>lab/check-assets.mjs</code>.
+    </div>
+
+    <div id="status" class="summary">running…</div>
+    <div id="checks" class="checks"></div>
+
+    <div id="report"></div>
+
+    <h2>Texture draws</h2>
+    <div class="canvases">
+      <figure>
+        <canvas id="atlas" width="256" height="256"></canvas>
+        <figcaption>atlas.png (16×16 palette), 16× nearest magnification</figcaption>
+      </figure>
+      <figure>
+        <canvas id="lut-ramp" width="512" height="96"></canvas>
+        <figcaption>top: neutral grey ramp in · bottom: same ramp through the 32³ LUT (CPU sampler, same mapping as the shader)</figcaption>
+      </figure>
+      <figure>
+        <canvas id="lut-slice" width="256" height="256"></canvas>
+        <figcaption>LUT slice at b = 0.5: x = red axis, y = green axis (8×8 px per texel). A correct LUT is red→right, green→up.</figcaption>
+      </figure>
+      <figure>
+        <canvas id="noise" width="256" height="256"></canvas>
+        <figcaption>noises-terrain.ktx2 (ETC1S, transcoded) rendered through a GPU quad then blitted from readPixels</figcaption>
+      </figure>
+    </div>
+
+    <div id="gl" style="visibility: hidden; height: 0; overflow: hidden"></div>
+
+    <script type="module" src="./assets-lab.js"></script>
+  </body>
+</html>
